@@ -5,21 +5,16 @@ import random
 
 def verificar_jogos(planilha, numeros_sorteados):
     try:
-        # Carregan a planilha
         df = pd.read_excel(planilha)
         
-        # Verificando se as colunas esperadas estão na planilha
         if 'Nome' not in df.columns or 'Jogo' not in df.columns:
             messagebox.showerror("Erro", "A planilha deve conter as colunas 'Nome' e 'Jogo'.")
             return None
         
-        # Convertendo os jogos no formato separado por hífens para listas de números
         df['Jogo'] = df['Jogo'].apply(lambda x: list(map(int, str(x).split('-'))))
         
-        # Calculando os acertos para cada jogo
         df['Acertos'] = df['Jogo'].apply(lambda jogo: len(set(jogo) & set(numeros_sorteados)))
         
-        # Ordenando os jogadores pelo número de acertos (decrescente)
         df = df.sort_values(by='Acertos', ascending=False)
         
         return df
@@ -37,12 +32,10 @@ def selecionar_arquivo():
     return None
 
 def processar_jogos():
-    # Obtendo o arquivo selecionado
     planilha = selecionar_arquivo()
     if not planilha:
         return
     
-    # Obtendo os números sorteados
     entrada = numeros_sorteados_entry.get()
     try:
         numeros_sorteados = list(map(int, entrada.split(',')))
@@ -50,26 +43,21 @@ def processar_jogos():
         messagebox.showerror("Erro", "Certifique-se de digitar apenas números separados por vírgula.")
         return
     
-    # Processando os jogos
     resultado = verificar_jogos(planilha, numeros_sorteados)
     
     if resultado is not None:
-        # Exibindo os resultados
-        resultados_text.delete(1.0, tk.END)  # Limpa resultados anteriores
+        resultados_text.delete(1.0, tk.END) 
         for index, row in resultado.iterrows():
             resultados_text.insert(tk.END, f"{row['Nome']} - Acertos: {row['Acertos']}\n")
         
-        # Salvando os resultados em uma nova planilha
         resultado.to_excel('resultado_bolao.xlsx', index=False)
         messagebox.showinfo("Sucesso", "Resultados salvos em 'resultado_bolao.xlsx'.")
     else:
         messagebox.showerror("Erro", "Não foi possível processar os jogos. Verifique os dados e tente novamente.")
 
-# Criando a interface gráfica
 root = tk.Tk()
 root.title("Bolão Mega da Virada")
 
-# Layout
 tk.Label(root, text="Digite os números sorteados (separados por vírgula):").pack(padx=10, pady=5)
 numeros_sorteados_entry = tk.Entry(root, width=40)
 numeros_sorteados_entry.pack(padx=10, pady=5)
