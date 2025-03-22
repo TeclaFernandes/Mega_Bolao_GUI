@@ -56,7 +56,7 @@ def processar_jogos():
 # Cria a janela principal
 root = tk.Tk()
 root.title("Bolão Mega da Virada")
-root.configure(bg="#999900")
+root.configure(bg="#FFF68F")
 
 # --- CENTRALIZANDO A JANELA ---
 largura_janela = 500
@@ -66,19 +66,19 @@ altura_tela = root.winfo_screenheight()
 
 pos_x = (largura_tela // 2) - (largura_janela // 2)
 pos_y = (altura_tela // 2) - (altura_janela // 2)
-
+''
 root.geometry(f"{largura_janela}x{altura_janela}+{pos_x}+{pos_y}")
 root.resizable(False, False)  # Travando o redimensionamento
 
 # --- INTERFACE ---
-tk.Label(root, text="Digite os números sorteados (separados por vírgula):", bg="#999900", font=("Arial", 13, "bold")).pack(padx=28, pady=5, anchor="w")
+tk.Label(root, text="Digite os números sorteados (separados por vírgula):", bg="#FFF68F", font=("Arial", 13, "bold")).pack(padx=28, pady=5, anchor="w")
 numeros_sorteados_entry = tk.Entry(root, width=50)
 numeros_sorteados_entry.pack(padx=28, pady=5, anchor="w")
 
-processar_button = tk.Button(root, text="Processar Jogos", command=processar_jogos)
+processar_button = tk.Button(root, text="Processar Jogos", command=processar_jogos, bg="#9ACD32", font=("Arial", 13, "bold"))
 processar_button.pack(padx=28, pady=10, anchor="w")
 
-resultados_label = tk.Label(root, text="Resultados:", bg="#999900", font=("Arial", 13, "bold"))
+resultados_label = tk.Label(root, text="Resultados:", bg="#FFF68F", font=("Arial", 13, "bold"))
 resultados_label.pack(padx=28, pady=5, anchor="w")
 
 resultados_text = tk.Text(root, width=55, height=14)
