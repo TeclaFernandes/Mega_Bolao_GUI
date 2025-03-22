@@ -53,12 +53,10 @@ def processar_jogos():
     else:
         messagebox.showerror("Erro", "Não foi possível processar os jogos. Verifique os dados e tente novamente.")
 
-# Cria a janela principal
 root = tk.Tk()
 root.title("Bolão Mega da Virada")
 root.configure(bg="#FFF68F")
 
-# --- CENTRALIZANDO A JANELA ---
 largura_janela = 500
 altura_janela = 400
 largura_tela = root.winfo_screenwidth()
@@ -68,9 +66,8 @@ pos_x = (largura_tela // 2) - (largura_janela // 2)
 pos_y = (altura_tela // 2) - (altura_janela // 2)
 ''
 root.geometry(f"{largura_janela}x{altura_janela}+{pos_x}+{pos_y}")
-root.resizable(False, False)  # Travando o redimensionamento
+root.resizable(False, False)
 
-# --- INTERFACE ---
 tk.Label(root, text="Digite os números sorteados (separados por vírgula):", bg="#FFF68F", font=("Arial", 13, "bold")).pack(padx=28, pady=5, anchor="w")
 numeros_sorteados_entry = tk.Entry(root, width=50)
 numeros_sorteados_entry.pack(padx=28, pady=5, anchor="w")
@@ -84,5 +81,4 @@ resultados_label.pack(padx=28, pady=5, anchor="w")
 resultados_text = tk.Text(root, width=55, height=14)
 resultados_text.pack(padx=10, pady=5)
 
-# Inicia a janela
 root.mainloop()
